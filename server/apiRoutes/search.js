@@ -23,7 +23,7 @@ app.post('/api/search', (req, res)=> {
 	if (query && operatorSet.has(operator)) {
 		lambda.invoke({
 			FunctionName: 'queryParser',
-			Payload: JSON.stringify({ query, operator })
+			Payload: JSON.stringify({ query.toLowerCase(), operator })
 		}, async (err, data) => {
 			if (data && data.StatusCode === 200) {
 				const payload = JSON.parse(JSON.parse(data.Payload));
